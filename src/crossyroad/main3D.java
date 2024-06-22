@@ -198,9 +198,9 @@ public class main3D extends JFrame implements Runnable {
         for (Point punto : Cara2) {
             pixel.putPixel(punto.x, punto.y, verdeFuerte);
         }
-        pixel.fillPolygon(Cara1, verde);
+        pixel.fillPolygon(Cara1, cafe);
         for (Point punto : Cara3) {
-            pixel.putPixel(punto.x, punto.y, verde);
+            pixel.putPixel(punto.x, punto.y, cafe);
         }
         for (Point punto : CaraGeneral) {
             pixel.putPixel(punto.x, punto.y, negro);
@@ -274,6 +274,7 @@ public class main3D extends JFrame implements Runnable {
             seccion_2();
             seccion_3();
             seccion_4();
+            pixel.repaint();
         }
     }
 }
