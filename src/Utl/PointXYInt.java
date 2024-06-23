@@ -8,13 +8,11 @@ package Utl;
  *
  * @author jimen
  */
-public class PointXYZ {
-    public double x, y, z;
-    public PointXYZ(double x, double y, double z)
+public class PointXYInt {
+    public int x, y;
+    public PointXYInt(int x, int y)
     {
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 }
-

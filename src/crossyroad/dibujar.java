@@ -1,7 +1,7 @@
 package crossyroad;
 
-import Utl.PointXY;
-import Utl.PointXYZ;
+import Utl.*;
+import Utl.PointXYZDouble;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -154,7 +154,7 @@ public class dibujar extends JPanel {
         }
     }
     
-    private PointXYZ translate(PointXYZ point) {
+    private PointXYZDouble translate(PointXYZDouble point) {
         double[] vector = { point.x, point.y, point.z, 1.0 };
 
         double[][] matrix = {
@@ -174,14 +174,14 @@ public class dibujar extends JPanel {
         double x = point.x + dx;
         double y = point.y + dy;
         double z = point.z + dz;
-        return new PointXYZ(x, y, z);
+        return new PointXYZDouble(x, y, z);
     }
 
-    private PointXYZ scale(PointXYZ point, double scaleX, double scaleY, double scaleZ) {
+    private PointXYZDouble scale(PointXYZDouble point, double scaleX, double scaleY, double scaleZ) {
         double x = point.x * scaleX;
         double y = point.y * scaleY;
         double z = point.z * scaleZ;
-        return new PointXYZ(x, y, z);
+        return new PointXYZDouble(x, y, z);
     }
 
     private void startRotationAndTranslation() {
@@ -214,14 +214,14 @@ public class dibujar extends JPanel {
         }
     }
     
-    private PointXYZ calculatePoint(double u, double v) {
+    private PointXYZDouble calculatePoint(double u, double v) {
         double x = (C + A * Math.cos(v)) * Math.cos(u);
         double y = (C + A * Math.cos(v)) * Math.sin(u);
         double z = A * Math.sin(v);
-        return new PointXYZ(x, y, z);
+        return new PointXYZDouble(x, y, z);
     }
 
-    private PointXYZ rotate(PointXYZ point, double angleX, double angleY, double angleZ) {
+    private PointXYZDouble rotate(PointXYZDouble point, double angleX, double angleY, double angleZ) {
         double cosX = Math.cos(angleX);
         double sinX = Math.sin(angleX);
         double cosY = Math.cos(angleY);
@@ -247,10 +247,11 @@ public class dibujar extends JPanel {
         return point;
     }
 
-    private PointXY applyPerspective(PointXYZ point) {
+    private PointXYDouble applyPerspective(PointXYZDouble point) {
         double scaleFactor = 1 / (1 + point.z * PERSPECTIVE_FACTOR);
         double x = point.x * scaleFactor + buffer.getWidth() / 2.0;
         double y = point.y * scaleFactor + buffer.getWidth() / 2.0;
-        return new PointXY(x, y);
+        return new PointXYDouble(x, y);
     }
+    
 }

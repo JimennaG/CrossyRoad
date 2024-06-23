@@ -1,5 +1,7 @@
 package crossyroad;
 
+import Objects.*;
+import Utl.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
@@ -24,6 +26,10 @@ public class main3D extends JFrame implements Runnable {
     private final dibujar pixel;
 
     int withPantalla = 550, heightPantalla = 650;
+    
+    //Para dibujar gallina
+    private final Thread hilo;
+    private final AnimadorGallina animador;
 
     main3D() {
         pixel = new dibujar();
@@ -36,8 +42,12 @@ public class main3D extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        Thread thread = new Thread(this);
-        thread.start();
+        animador = new AnimadorGallina();
+        hilo = new Thread(this);
+        hilo.start();
+        
+//        Thread thread = new Thread(this);
+//        thread.start();
     }
 
     public void seccion_1() {
@@ -263,6 +273,10 @@ public class main3D extends JFrame implements Runnable {
             pixel.putPixel(punto.x, punto.y, negro);
         }
     }
+    
+    public void gallina(){
+        
+    }
 
     public static void main(String[] args) {
         new main3D();
@@ -270,13 +284,140 @@ public class main3D extends JFrame implements Runnable {
 
     @Override
     public void run() {
+        animador.setInicioAplicacion(System.currentTimeMillis());
         while (true) {
+            try {
+                repaint();
+                hilo.sleep(20);
+            } catch (InterruptedException ex) {
+                System.out.println("error");
+            }
+        }
+    }
+
+    public void update(Graphics g) {
+        Image buffer = createImage(getWidth(), getHeight());
+
+        DibujarGallina d= new DibujarGallina(this);
+        animador.setDibujar(d);
+
+        // escena 1 (gallina)
+        if(animador.tiempoActual<=15000) {
+            animador.nuevaAnimacion();
+            d.color=Color.decode("#76C1FF");
+            d.rectanguloRelleno(0, 0, 550, 650);
+            d.drawToBuffer(buffer, this);
+//            animador.nuevaAnimacion();
+            //animador.traslacion(300, 300, 0, 10000);
+            //animador.traslacion(-300, -200, 10000, 15000);
+            //d.elipse(0, 0, 40, 40);
+            //d.floodFill(0, 0);
+
+            animador.nuevaAnimacion();
+            d.traslacion(getWidth()/2,getHeight()/2);
+            d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
+            animador.rotacionY3D(0,10,0000,15000);
+
+            d.resetImage(this);
+            gallina(d);
+            d.drawToBuffer(buffer, this);
+        }
+        // escena 2 (animacion 3D)
+        if(animador.tiempoActual>15000 && animador.tiempoActual<60000) {
             seccion_1();
             seccion_2();
             seccion_3();
             seccion_4();
             pixel.repaint();
+            
+//            animador.nuevaAnimacion();
+//            d.traslacion(getWidth()/2,getHeight()/2);
+//            //d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
+//            d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
+//            d.setVectorRotacion(-0.4, 9, 0);
+//            //animador.rotacionY3D(0,10,0000,30000);
+//
+//            animador.traslacion(0, 1000, 15000, 60000);
+//
+////            d.resetImage(this);
+////            d.color=Color.blue;
+////            d.plano(0,15,0,200,200);
+////            d.drawToBuffer(buffer, this);
+//
+//            d.resetImage(this);
+//            d.color= Color.decode("#3AB54A");
+//            d.cubo(0,0,0,500,10,100);
+//            d.drawToBuffer(buffer, this);
+//            
+//            d.resetImage(this);
+//            d.color= Color.decode("#76C1FF");
+//            d.cubo(0,125,0,700,10,400);
+//            d.drawToBuffer(buffer, this);
+//            
+//            d.resetImage(this);
+//            d.color= Color.decode("#B2B2B2");
+//            d.cubo(0,-55,0,700,10,150);
+//            d.drawToBuffer(buffer, this);
+//            
+//            d.resetImage(this);
+//            d.color= Color.decode("#3AB54A");
+//            d.cubo(0,0,0,500,10,100);
+//            d.drawToBuffer(buffer, this);
+//            
+//            d.resetImage(this);
+//            d.color= Color.decode("#76C1FF");
+//            d.cubo(0,125,0,700,10,400);
+//            d.drawToBuffer(buffer, this);
+//            
+//            d.resetImage(this);
+//            d.color= Color.decode("#B2B2B2");
+//            d.cubo(0,-55,0,700,10,150);
+//            d.drawToBuffer(buffer, this);
+//            
+//            
+//            d.resetImage(this);
+//            d.color= Color.WHITE;
+//            d.cubo(0,0,0,50,50,50);
+//            d.drawToBuffer(buffer, this);
+            
+//            d.resetImage(this);
+//            d.color=Color.WHITE;
+//            d.cubo(0,100,0,100,100,150);
+//            d.drawToBuffer(buffer, this);
+
+
+//            d.resetImage(this);
+//            d.color=Color.black;
+//            d.linea3D(100,15,100,0,-50,0);
+//            d.linea3D(-100,15,100,0,-50,0);
+//            d.linea3D(-100,15,-100,0,-50,0);
+//            d.linea3D(100,15,-100,0,-50,0);
+//            d.drawToBuffer(buffer, this);
         }
+
+        g.drawImage(buffer, 0, 0, this);
+    }
+
+    public void gallina(DibujarGallina d){
+        d.color=Color.white;
+        d.cubo(0,0,0,100,200,120);
+        d.color = Color.RED;
+        d.cubo(0,-120,0,50,30,75);
+        d.cubo(0,-25,-75,25,25,20); //pico
+        d.color = Color.decode("#FFA500");
+        d.cubo(25, 170, 0, 25, 30, 50);//pie
+        d.cubo(-25, 170, 0, 25, 30, 50);//pie
+        d.cubo(25, 130, 0, 20, 50, 20);//pata
+        d.cubo(-25, 130, 0, 20, 50, 20);//pata
+        d.cubo(0,-50,-80,25,25,30);//pico
+        d.color = Color.BLACK;//ojos
+        d.cubo(50, -70, -20, 5, 15, 15);
+        d.cubo(-50, -70, -20, 5, 15, 15);
+        
+    }
+    
+    public void paint(Graphics g) {
+        update(g);
     }
 
 }
