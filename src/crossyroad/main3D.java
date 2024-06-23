@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class main3D extends JFrame implements Runnable {
 
@@ -57,7 +58,7 @@ public class main3D extends JFrame implements Runnable {
         // Aplicar proyección oblicua
         for (int i = 0; i < 8; i++) {
             puntosProyectadosOrtogonal[i] = proye.proyeccionOrtogonal(puntosIniciales[i][0], puntosIniciales[i][1], puntosIniciales[i][2]);
-        }
+        } 
         List<Point> CaraGeneral = new ArrayList<>();
         List<Point> Cara1 = new ArrayList<>();
         List<Point> Cara2 = new ArrayList<>();
@@ -277,4 +278,5 @@ public class main3D extends JFrame implements Runnable {
             pixel.repaint();
         }
     }
+
 }

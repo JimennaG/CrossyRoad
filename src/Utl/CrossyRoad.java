@@ -4,6 +4,7 @@
  */
 package Utl;
 
+import crossyroad.main3D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -25,13 +26,14 @@ public class CrossyRoad extends JFrame{
     private Color currentColor;
     
     public static void main(String[] args) {
-        new CrossyRoad();
+        //new CrossyRoad();
+        //new main3D();
     }
     
     public CrossyRoad(){
         bufferPixel = new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
         
-        setTitle("SegundoParcialGraficas");
+        setTitle("CrossyRoad");
         setResizable(false);
         setSize(WIDTH, HEIGHT);
         setLayout(null);

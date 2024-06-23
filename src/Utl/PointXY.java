@@ -9,8 +9,8 @@ package Utl;
  * @author jimen
  */
 public class PointXY {
-    public int x, y;
-    public PointXY(int x, int y)
+    public double x, y;
+    public PointXY(double x, double y)
     {
         this.x = x;
         this.y = y;
