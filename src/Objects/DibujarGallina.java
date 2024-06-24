@@ -25,7 +25,7 @@ public class DibujarGallina {
     public DibujarGallina(JFrame frame) {
         resetImage(frame);
     }
-    
+
     public DibujarGallina(JPanel panel) {
         resetImagePanel(panel);
     }
@@ -1170,5 +1170,4 @@ public class DibujarGallina {
     public void resetImagePanel(JPanel ventana) {
         this.image = new BufferedImage(ventana.getWidth(), ventana.getHeight(), BufferedImage.TYPE_INT_ARGB);
     }
-
 }

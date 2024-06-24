@@ -3,9 +3,15 @@ package crossyroad;
 public class proyecciones {
 
     // Método para la proyección ortogonal
-    public int[] proyeccionOrtogonal(int x, int y, int z) {
-        int[] puntoProyectado = {x, y}; // Simplemente descartamos la coordenada z
-        return puntoProyectado;
+     public int[] proyeccionOrtogonal(int x, int y, int z) {
+        return new int[]{x, y};
+    }
+    
+       public int[] proyeccionIsometrica(int x, int y, int z) {
+        // Ajuste para una inclinación menor
+        int xIso = (int) ((x - y) * Math.cos(Math.PI / 12));
+        int yIso = (int) ((x + y) * Math.sin(Math.PI / 12) - z);
+        return new int[]{xIso, yIso};
     }
 
     // Método para la proyección oblicua
