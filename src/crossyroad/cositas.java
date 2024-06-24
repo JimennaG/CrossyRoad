@@ -264,6 +264,27 @@ public class cositas {
 
         g.setColor(new Color(139, 69, 19)); // Color del tronco
         rellenarCubo(g, troncoProyectado, new Color(139, 69, 19));
+        
+        // Coordenadas del tronco en 3D
+        int[][] monedita = {
+            {x, y, z},
+            {x + 15, y, z},
+            {x + 15, y + 15, z},
+            {x, y + 15, z},
+            {x, y, z + 10},
+            {x + 15, y, z + 10},
+            {x + 15, y + 15, z + 10},
+            {x, y + 15, z + 10}
+        };
+
+        int[][] moneditaProyectada = new int[8][2];
+
+        for (int i = 0; i < 8; i++) {
+            moneditaProyectada[i] = proye.proyeccionIsometrica(monedita[i][0], monedita[i][1], monedita[i][2]);
+        }
+
+        g.setColor(new Color(255, 255, 53)); // Color de la moneda
+        rellenarCubo(g, moneditaProyectada, new Color(255, 255, 53));
     }
 
     public void dibujarTrailerIzquierda(Graphics g, int x, int y, int z) {
