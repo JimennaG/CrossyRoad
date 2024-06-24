@@ -276,6 +276,7 @@ public class main3D extends JFrame implements Runnable {
     
     public void gallina(){
         
+        
     }
 
     public static void main(String[] args) {
@@ -300,9 +301,12 @@ public class main3D extends JFrame implements Runnable {
 
         DibujarGallina d= new DibujarGallina(this);
         animador.setDibujar(d);
+        
+        
 
         // escena 1 (gallina)
         if(animador.tiempoActual<=15000) {
+        //if(animador.tiempoActual<=1000) {
             animador.nuevaAnimacion();
             d.color=Color.decode("#76C1FF");
             d.rectanguloRelleno(0, 0, 550, 650);
@@ -317,6 +321,7 @@ public class main3D extends JFrame implements Runnable {
             d.traslacion(getWidth()/2,getHeight()/2);
             d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
             animador.rotacionY3D(0,10,0000,15000);
+            //animador.rotacionY3D(0,10,0000,1000);
 
             d.resetImage(this);
             gallina(d);
@@ -324,75 +329,22 @@ public class main3D extends JFrame implements Runnable {
         }
         // escena 2 (animacion 3D)
         if(animador.tiempoActual>15000 && animador.tiempoActual<60000) {
+        //if(animador.tiempoActual>1000 && animador.tiempoActual<60000) {
+            animador.nuevaAnimacion();
+            
+            DibujarGallina dMiniGallina = new DibujarGallina(pixel);
+            animador.setDibujar(dMiniGallina);
+            dMiniGallina.traslacion(getWidth()/2,getHeight()/2);
+            dMiniGallina.setVectorProyeccion(new PointXYZInt(40,40,-10000));
+            dMiniGallina.setVectorRotacion(-0.4, 9, 0);
+            
             seccion_1();
             seccion_2();
             seccion_3();
             seccion_4();
+            miniGallina(dMiniGallina);
+            dMiniGallina.drawToBufferPanel(buffer, pixel);
             pixel.repaint();
-            
-//            animador.nuevaAnimacion();
-//            d.traslacion(getWidth()/2,getHeight()/2);
-//            //d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
-//            d.setVectorProyeccion(new PointXYZInt(40,40,-10000));
-//            d.setVectorRotacion(-0.4, 9, 0);
-//            //animador.rotacionY3D(0,10,0000,30000);
-//
-//            animador.traslacion(0, 1000, 15000, 60000);
-//
-////            d.resetImage(this);
-////            d.color=Color.blue;
-////            d.plano(0,15,0,200,200);
-////            d.drawToBuffer(buffer, this);
-//
-//            d.resetImage(this);
-//            d.color= Color.decode("#3AB54A");
-//            d.cubo(0,0,0,500,10,100);
-//            d.drawToBuffer(buffer, this);
-//            
-//            d.resetImage(this);
-//            d.color= Color.decode("#76C1FF");
-//            d.cubo(0,125,0,700,10,400);
-//            d.drawToBuffer(buffer, this);
-//            
-//            d.resetImage(this);
-//            d.color= Color.decode("#B2B2B2");
-//            d.cubo(0,-55,0,700,10,150);
-//            d.drawToBuffer(buffer, this);
-//            
-//            d.resetImage(this);
-//            d.color= Color.decode("#3AB54A");
-//            d.cubo(0,0,0,500,10,100);
-//            d.drawToBuffer(buffer, this);
-//            
-//            d.resetImage(this);
-//            d.color= Color.decode("#76C1FF");
-//            d.cubo(0,125,0,700,10,400);
-//            d.drawToBuffer(buffer, this);
-//            
-//            d.resetImage(this);
-//            d.color= Color.decode("#B2B2B2");
-//            d.cubo(0,-55,0,700,10,150);
-//            d.drawToBuffer(buffer, this);
-//            
-//            
-//            d.resetImage(this);
-//            d.color= Color.WHITE;
-//            d.cubo(0,0,0,50,50,50);
-//            d.drawToBuffer(buffer, this);
-            
-//            d.resetImage(this);
-//            d.color=Color.WHITE;
-//            d.cubo(0,100,0,100,100,150);
-//            d.drawToBuffer(buffer, this);
-
-
-//            d.resetImage(this);
-//            d.color=Color.black;
-//            d.linea3D(100,15,100,0,-50,0);
-//            d.linea3D(-100,15,100,0,-50,0);
-//            d.linea3D(-100,15,-100,0,-50,0);
-//            d.linea3D(100,15,-100,0,-50,0);
-//            d.drawToBuffer(buffer, this);
         }
 
         g.drawImage(buffer, 0, 0, this);
@@ -413,6 +365,21 @@ public class main3D extends JFrame implements Runnable {
         d.color = Color.BLACK;//ojos
         d.cubo(50, -70, -20, 5, 15, 15);
         d.cubo(-50, -70, -20, 5, 15, 15);
+    }
+    
+    public void miniGallina(DibujarGallina d){
+        d.color=Color.white;
+        d.cubo(0,200,0,50,50,60);
+        d.color = Color.RED;
+        d.cubo(0,165,0,25,25,37);
+        d.color = Color.decode("#FFA500");
+        d.cubo(13, 260, 0, 13, 15, 25);//pie
+        d.cubo(-13, 260, 0, 13, 15, 25);//pie
+        d.cubo(13, 240, 0, 10, 25, 10);//pata
+        d.cubo(-13, 240, 0, 10, 25, 10);//pata
+        d.color = Color.BLACK;//ojos
+        d.cubo(25, 190, -10, 3, 8, 8);
+        d.cubo(-25, 190, -10, 3, 8, 8);
         
     }
     

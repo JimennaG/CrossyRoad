@@ -25,6 +25,10 @@ public class DibujarGallina {
     public DibujarGallina(JFrame frame) {
         resetImage(frame);
     }
+    
+    public DibujarGallina(JPanel panel) {
+        resetImagePanel(panel);
+    }
 
     public void putPixel(int x, int y) {
         if ((x < 0 || x >= image.getWidth()) || (y < 0 || y >= image.getHeight()))
@@ -640,75 +644,7 @@ public class DibujarGallina {
         linea(puntos[2].x, puntos[2].y, puntos[6].x, puntos[6].y);
         linea(puntos[3].x, puntos[3].y, puntos[7].x, puntos[7].y);
     }
-
-    public void tetris(int x, int y, int z, int ancho, double angulo) {
-        PointXYZDouble vector = new PointXYZDouble(0, 0, 0);
-
-        PointXYZInt[] puntos = new PointXYZInt[16];
-        puntos[0] = new PointXYZInt(x, y, z);
-        puntos[1] = new PointXYZInt(x + ancho, y, z);
-        puntos[2] = new PointXYZInt(x + ancho, y + ancho, z);
-        puntos[3] = new PointXYZInt(x + ancho * 2, y + ancho, z);
-        puntos[4] = new PointXYZInt(x + ancho * 2, y + ancho * 2, z);
-        puntos[5] = new PointXYZInt(x + ancho, y + ancho * 2, z);
-        puntos[6] = new PointXYZInt(x + ancho, y + ancho * 3, z);
-        puntos[7] = new PointXYZInt(x, y + ancho * 3, z);
-
-        puntos[8] = new PointXYZInt(x, y, z + ancho);
-        puntos[9] = new PointXYZInt(x + ancho, y, z + ancho);
-        puntos[10] = new PointXYZInt(x + ancho, y + ancho, z + ancho);
-        puntos[11] = new PointXYZInt(x + ancho * 2, y + ancho, z + ancho);
-        puntos[12] = new PointXYZInt(x + ancho * 2, y + ancho * 2, z + ancho);
-        puntos[13] = new PointXYZInt(x + ancho, y + ancho * 2, z + ancho);
-        puntos[14] = new PointXYZInt(x + ancho, y + ancho * 3, z + ancho);
-        puntos[15] = new PointXYZInt(x, y + ancho * 3, z + ancho);
-
-        // Rotate around the y-axis
-        double cosTheta = Math.cos(angulo);
-        double sinTheta = Math.sin(angulo);
-        for (int i = 0; i < puntos.length; i++) {
-            PointXYZInt punto = puntos[i];
-            double rotatedX = punto.x * cosTheta + punto.z * sinTheta;
-            double rotatedZ = -punto.x * sinTheta + punto.z * cosTheta;
-            puntos[i] = new PointXYZInt((int) rotatedX, punto.y, (int) rotatedZ);
-        }
-
-
-        for (int i = 0; i < puntos.length; i++) {
-            puntos[i] = proyectarParalela(puntos[i], vector);
-        }
-
-
-        linea(puntos[0].x, puntos[0].y, puntos[1].x, puntos[1].y);
-        linea(puntos[1].x, puntos[1].y, puntos[2].x, puntos[2].y);
-        linea(puntos[2].x, puntos[2].y, puntos[3].x, puntos[3].y);
-        linea(puntos[3].x, puntos[3].y, puntos[4].x, puntos[4].y);
-        linea(puntos[4].x, puntos[4].y, puntos[5].x, puntos[5].y);
-        linea(puntos[5].x, puntos[5].y, puntos[6].x, puntos[6].y);
-        linea(puntos[6].x, puntos[6].y, puntos[7].x, puntos[7].y);
-        linea(puntos[7].x, puntos[7].y, puntos[0].x, puntos[0].y);
-
-
-        linea(puntos[8].x, puntos[8].y, puntos[9].x, puntos[9].y);
-        linea(puntos[9].x, puntos[9].y, puntos[10].x, puntos[10].y);
-        linea(puntos[10].x, puntos[10].y, puntos[11].x, puntos[11].y);
-        linea(puntos[11].x, puntos[11].y, puntos[12].x, puntos[12].y);
-        linea(puntos[12].x, puntos[12].y, puntos[13].x, puntos[13].y);
-        linea(puntos[13].x, puntos[13].y, puntos[14].x, puntos[14].y);
-        linea(puntos[14].x, puntos[14].y, puntos[15].x, puntos[15].y);
-        linea(puntos[15].x, puntos[15].y, puntos[8].x, puntos[8].y);
-
-
-        linea(puntos[0].x, puntos[0].y, puntos[8].x, puntos[8].y);
-        linea(puntos[1].x, puntos[1].y, puntos[9].x, puntos[9].y);
-        linea(puntos[2].x, puntos[2].y, puntos[10].x, puntos[10].y);
-        linea(puntos[3].x, puntos[3].y, puntos[11].x, puntos[11].y);
-        linea(puntos[4].x, puntos[4].y, puntos[12].x, puntos[12].y);
-        linea(puntos[5].x, puntos[5].y, puntos[13].x, puntos[13].y);
-        linea(puntos[6].x, puntos[6].y, puntos[14].x, puntos[14].y);
-        linea(puntos[7].x, puntos[7].y, puntos[15].x, puntos[15].y);
-    }
-
+    
     public PointXYZInt proyectarParalela(PointXYZInt punto, PointXYZDouble vector) {
         double u;
         if (vector.z == 0) {
@@ -1218,12 +1154,20 @@ public class DibujarGallina {
     public void drawToBuffer(Image buffer, JFrame frame) {
         buffer.getGraphics().drawImage(image, 0, 0, frame);
     }
+    
+    public void drawToBufferPanel(Image buffer, JPanel panel) {
+        buffer.getGraphics().drawImage(image, 0, 0, panel);
+    }
 
     public void setImage(BufferedImage image) {
         this.image = image;
     }
 
     public void resetImage(JFrame ventana) {
+        this.image = new BufferedImage(ventana.getWidth(), ventana.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    }
+    
+    public void resetImagePanel(JPanel ventana) {
         this.image = new BufferedImage(ventana.getWidth(), ventana.getHeight(), BufferedImage.TYPE_INT_ARGB);
     }
 

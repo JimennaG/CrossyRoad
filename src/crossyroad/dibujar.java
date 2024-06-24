@@ -254,4 +254,101 @@ public class dibujar extends JPanel {
         return new PointXYDouble(x, y);
     }
     
+    
+    
+ 
+//    private void DrawCube(int x, int y, int z, int ancho, int alto, int largo, Color color)
+//    {
+//        PointXYZInt vector = new PointXYZInt(-2,-1,6);
+//        
+//        ArrayList<PointXYZInt> pointsXYZ = new ArrayList<>();
+//        pointsXYZ.add(new PointXYZInt(50, 150, 150)); // A
+//        pointsXYZ.add(new PointXYZInt(150, 150, 150)); // B
+//        pointsXYZ.add(new PointXYZInt(50, 250, 150)); // C
+//        pointsXYZ.add(new PointXYZInt(150, 250, 150)); // D
+//
+//        pointsXYZ.add(new PointXYZInt(50, 150, 250)); // E
+//        pointsXYZ.add(new PointXYZInt(150, 150, 250)); // F
+//        pointsXYZ.add(new PointXYZInt(50, 250, 250)); // G
+//        pointsXYZ.add(new PointXYZInt(150, 250, 250)); // H
+//        
+//        for (int i = 0; i < pointsXYZ.size(); i++)
+//        {
+//            float u =  (float) (-1 * pointsXYZ.get(i).z) / vector.z;
+//            float x = pointsXYZ.get(i).x + (vector.x * u);
+//            float y = pointsXYZ.get(i).y + (vector.y * u);
+//
+//            pointsXYInt.add(new PointXYInt((int) x, (int) y));
+//        }
+//        for (PointXY point: pointsXY)
+//        {
+//            PutPixel(point.x, point.y, MyColor.myYellow);
+//            System.out.println("x:" + point.x + " y:" + point.y);
+//        }
+//
+//        LineaBresenham lineAB = new LineaBresenham(pointsXY.get(0), pointsXY.get(1));
+//        LineaBresenham lineAC = new LineaBresenham(pointsXY.get(0), pointsXY.get(2));
+//        LineaBresenham lineAE = new LineaBresenham(pointsXY.get(0), pointsXY.get(4));
+//
+//        LineaBresenham lineBD = new LineaBresenham(pointsXY.get(1), pointsXY.get(3));
+//        LineaBresenham lineBF = new LineaBresenham(pointsXY.get(1), pointsXY.get(5));
+//
+//        LineaBresenham lineEG = new LineaBresenham(pointsXY.get(4), pointsXY.get(6));
+//        LineaBresenham lineEF = new LineaBresenham(pointsXY.get(4), pointsXY.get(5));
+//
+//        LineaBresenham lineCG = new LineaBresenham(pointsXY.get(2), pointsXY.get(6));
+//        LineaBresenham lineCD = new LineaBresenham(pointsXY.get(2), pointsXY.get(3));
+//
+//        LineaBresenham lineHG = new LineaBresenham(pointsXY.get(7), pointsXY.get(6));
+//        LineaBresenham lineHF = new LineaBresenham(pointsXY.get(7), pointsXY.get(5));
+//        LineaBresenham lineHD = new LineaBresenham(pointsXY.get(7), pointsXY.get(3));
+//
+//        ArrayList<PointXYInt> points = lineAB.LineToPointsXY();
+//        points.addAll(lineCG.LineToPointsXY());
+//        points.addAll(lineBF.LineToPointsXY());
+//        points.addAll(lineHF.LineToPointsXY());
+//        points.addAll(lineHG.LineToPointsXY());
+//        points.addAll(lineAC.LineToPointsXY());
+//
+//        for (PointXY point: points)
+//            PutPixel(point.x, point.y, MyColor.myYellow);
+//        Rellenar(110, 266, MyColor.myYellow, MyColor.myYellow);
+////
+//        points.addAll(lineBD.LineToPointsXY());
+//        points.addAll(lineHD.LineToPointsXY());
+//        points.addAll(lineEG.LineToPointsXY());
+//        points.addAll(lineAE.LineToPointsXY());
+//        points.addAll(lineEF.LineToPointsXY());
+//        points.addAll(lineCD.LineToPointsXY());
+//
+//        for (PointXYInt point: points)
+//            PutPixel(point.x, point.y, MyColor.cabinBlack2);
+//    }
+//
+//    public void Rellenar (int x, int y,Color color, Color figura) {
+//        int limiteIzquierdo = x;
+//        int limiteDerecho = x;
+//
+//        while (getPixel(limiteIzquierdo - 1, y) != figura.getRGB()) {
+//            limiteIzquierdo--;
+//        }
+//        while (getPixel(limiteDerecho + 1, y) != figura.getRGB()) {
+//            limiteDerecho++;
+//        }
+//
+//        for (int i = limiteIzquierdo; i <= limiteDerecho; i++) {
+//            PutPixel(i, y, color);
+//        }
+//
+//        for (int i = limiteIzquierdo; i <= limiteDerecho; i++) {
+//            if (getPixel(i , y - 1) != figura.getRGB() && getPixel(i , y - 1) != color.getRGB()) {
+//                Rellenar(i, y - 1,color,figura);
+//            }
+//            if (getPixel(i , y + 1) != figura.getRGB() && getPixel(i , y + 1) != color.getRGB()) {
+//                Rellenar(i, y + 1,color,figura);
+//            }
+//        }
+//    }
+//    
+//    public int getPixel(int x, int y) { return buffer.getRGB(x, y); }
 }

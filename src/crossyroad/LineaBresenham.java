@@ -1,13 +1,21 @@
 package crossyroad;
 
+import Utl.PointXYInt;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LineaBresenham {
-
+    
+    public PointXYInt pointA, pointB;
     // Constructor vacío, no se requiere inicialización adicional.
     public LineaBresenham() {
+    }
+    
+    public LineaBresenham(PointXYInt pointA, PointXYInt pointB)
+    {
+        this.pointA = pointA;
+        this.pointB = pointB;
     }
 
     // Método para calcular los puntos en una línea usando el algoritmo de Bresenham
@@ -38,5 +46,62 @@ public class LineaBresenham {
             }
         }
         return puntos;  // Devolver la lista de puntos que forman la línea
+    }
+    
+    public ArrayList<PointXYInt> LineToPointsXY()
+    {
+        ArrayList<PointXYInt> points = new ArrayList<PointXYInt>();
+
+        int xk = pointA.x, yk = pointA.y;
+        int dx = pointB.x - pointA.x, dy = pointB.y - pointA.y;
+        int incX = 1, incY = 1, incE, incNE, pk = 0;
+
+        if (dx < 0)
+        {
+            dx = -dx;
+            incX = -1;
+        }
+        if (dy < 0)
+        {
+            dy = -dy;
+            incY = -1;
+        }
+
+        if (Math.abs(dx) > Math.abs(dy))
+        {
+            incE = 2 * dy;
+            incNE = 2 * (dy - dx);
+
+            while (xk != pointB.x)
+            {
+                points.add(new PointXYInt(xk, yk));
+                xk += incX;
+                if (2 * (pk + dy) < dx)
+                    pk += incE;
+                else
+                {
+                    pk += incNE;
+                    yk += incY;
+                }
+            }
+        }
+        else
+        {
+            incE = 2 * dx;
+            incNE = 2 * (dx - dy);
+            while (yk != pointB.y)
+            {
+                points.add(new PointXYInt(xk, yk));
+                yk += incY;
+                if (2 * (pk + dx) < dy)
+                    pk += incE;
+                else
+                {
+                    pk += incNE;
+                    xk += incX;
+                }
+            }
+        }
+        return points;
     }
 }
